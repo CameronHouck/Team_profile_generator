@@ -123,3 +123,59 @@ const userPrompt = () => {
       }
     });
 };
+
+let generateHTMLCard = (newTeamObj) => {
+  console.log("team object", newTeamObj);
+  let newCard = "";
+  for (let i = 0; i < newTeamObj.length; i++) {
+    let finalPrompt =
+      newTeamObj[i].office || newTeamObj[i].github || newTeamObj[i].school;
+    let keys = Object.keys(newTeamObj[i]);
+    let lastKey = keys[3];
+    let finalOption = lastKey + ":" + finalPrompt;
+    if (lastKey === undefined) {
+      finalOption = "";
+    } else if (lastKey === "github") {
+      finalOption = `GitHub : <a value="Open Window"
+        onclick="window.open('https://www.github.com/${newTeamObj[i].github}')"> ${newTeamObj[i].github}</a>`;
+      console.log(finalOption);
+    } else {
+      console.log(finalOption);
+    }
+    let { name, id, email } = newTeamObj[i];
+    console.log(name, id, email, finalOption);
+    newCard += `  
+  <div class="card" style="width: 18rem;">
+  <div class="container">
+    <div style="background-color:rgb(66, 57, 240); color: white;">
+       <h4 class="display-6">${name}</h4>
+       <h4>${newTeamObj[i].constructor.name}</h4>
+     </div> 
+      <ul class="list-group">
+        <li class="list-group-item">ID: ${id}</li>
+        <li class="list-group-item">Email: <a href="mailto:${email}">${email}</a></li>
+        <li class="list-group-item">${finalOption} </li>
+      </ul>
+  </div>
+  </div>`;
+  }
+  return newCard;
+};
+const generateHTMLPage = (htmlCard) =>
+  `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link rel="stylesheet" type="text/css" href="./style.css" />
+      <title>Document</title>
+    </head>
+    <body>
+  ${htmlCard}
+    </body>
+    </html>`;
+const writeToFile = (data) => {
+  fs.writeFile("./dist/index.html", data, (error) =>
+    error ? console.log("Error!") : console.log("Success!")
+  );
+};
