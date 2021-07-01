@@ -32,7 +32,7 @@ const internQuestion = [
     message: "Enter the name of your intern's school.",
   },
 ];
-const additionalMember = () => {
+const promptAnotherEmployee = () => {
   inquirer
     .prompt([
       {
