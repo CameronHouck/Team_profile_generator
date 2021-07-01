@@ -75,7 +75,7 @@ const userPrompt = () => {
       {
         type: "input",
         name: "email",
-        message: "Enter your employees email adress.",
+        message: "Enter your employees email address.",
       },
     ])
     .then((userInput) => {
