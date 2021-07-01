@@ -179,3 +179,8 @@ const writeToFile = (data) => {
     error ? console.log("Error!") : console.log("Success!")
   );
 };
+
+const init = () => {
+  userPrompt();
+};
+init();
